@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
+
+// fetching data - dict with entire dataset
 function Features() {
   let features
   fetch('/features/').then(res => res.json()).then(data => {
@@ -11,6 +13,7 @@ function Features() {
   return features;
 }
 
+// building react object
 function Init_input(key, val) {
   return (
     <div key={key}>
@@ -29,6 +32,7 @@ function Init_input(key, val) {
   );
 };
 
+// setter for slider, fetching with key and value a new value from api, sets label to new value
 function Set_value(key, control, label) { // wie übergebe ich da am besten die argumente, bzw wie verweise ich auf den richtigen fader und das label
   const [value, set_value] = useState(0);
   useEffect(() => {
@@ -40,6 +44,7 @@ function Set_value(key, control, label) { // wie übergebe ich da am besten die 
   label.value = value;
 }
 
+
 function App() {
   let features = Features()
   console.log('from App:  ' + features)
@@ -48,14 +53,11 @@ function App() {
   for (let feature in features) {
     items.push(Init_input(feature, feature.val))  // content ist eine liste mit react objecten. warum werdne die nicht angezeigt?
   }
-
-
   return (
     <div >
       { items }
     </div>
   );
-
 }
 
 export default App;
