@@ -1,83 +1,75 @@
+
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
-
-function init_item(name, data) {
-  let items = []
-
-  let label_txt = build_label(name);
-  let label_val = build_label(data[name]);
-  let control = build_control(name, data[name], label_val);
-  items.push(label_txt);
-  items.push(control);
-  items.push(label_val);
-  return items
-};
-
-function build_label(val) {
-  let label = document.createElement('output');
-  //label.type = 'label';
-  label.value = val;
-  return label
-}
-
-function build_control(name, val, label_val) {
-  let control = document.createElement('input');
-  control.type = "range";
-  control.value = val;
-  control.addEventListener("change", function () {
-    const [value, set_value] = useState(0);
-    useEffect(() => {
-      let val = control.value
-      fetch('/feature/' + name + '/' + val).then(res => res.json()).then(data => {
-        set_value(data.result);
-      });
-    }, []);
-    label_val.value = value;
-  });
-  return control
-}
-
-function tableCreate(items) {
-  let tbl = document.createElement('table');
-  tbl.style.width = '100px';
-  for (let row = 0; row < items.length; row++) {
-    const tr = tbl.insertRow();
-    for (let item = 0; item < items[row].length; item++) {
-      const td = tr.insertCell();
-      td.appendChild(items[row][item]);
-      td.setAttribute('rowSpan', '1');
-    };
-  };
-  return tbl
-}
-
-
-
-
-
 function App() {
+
   const [features, set_features] = useState(0);
   useEffect(() => {
     fetch('/features/').then(res => res.json()).then(data => {
       set_features(data)
     });
   }, []);
-  let items = []
-  console.log(features)
-  for (var key in features) {
-    items.push(init_item(key, features));
+  function createInputs() {
+    features_objects = [];
+    Object.keys(features).forEach(function (key, index) {
+      fea_ob = (<div key={i}>
+             <label>{el}</label>
+             <label>{i}</label>)
+      features_objects.push()
+      console.log(index, key);
+    });
   };
-  let tbl = tableCreate(items);
-  let main =  (
-    <div className="App">
-    <header className="App-header">
-    </header>
-  </div>
-  )
-  //document.getElementById(main).appendChild(tbl)
-return main
-};
+  //const [values, setValues] = useState({ val: [] });
+  //return values.val.map((el, i) 
+  //onsole.log(feature);
+  //   <div key={i}>
+  //     <label>{el}</label>
+  //     <label>{i}</label>
+  //     <input type="range" onChange={handleChange.bind(i)} />
+  // <input type="range" onChange={handleChange.bind()} />
+  // <input type='button' value='remove' onClick={removeClick.bind(i)} />
+  //     <input type='button' value='remove' onClick={removeClick.bind(i)} />
+  //   </div>
+  // );
 
+
+  // function handleChange(event) {
+  //   console.log(event.target.value)
+  //   console.log(values)
+  //   let vals = [...values.val];
+  //   console.log(vals)
+  //   vals[this] = event.target.value;
+  //   setValues({ val: vals });
+  // }
+  // 
+  // const addClick = () => {
+  //   setValues({ val: [...values.val, ''] })
+  // }
+  // 
+  // const removeClick = () => {
+  //   let vals = [...values.val];
+  //   vals.splice(this, 1);
+  //   setValues({ val: vals });
+  // }
+  // 
+  // const handleSubmit = event => {
+  //   alert('A name was submitted: ' + values.val.join(', '));
+  //   event.preventDefault();
+  // }
+  // 
+  // <input type='button' value='add more' onClick={addClick} />
+  // <form onSubmit={handleSubmit}>
+  // 
+
+  return (
+    <form >
+      {createInputs()}
+      <input type="submit" value="Submit" />
+    </form>
+  );
+
+}
 
 export default App;
+
