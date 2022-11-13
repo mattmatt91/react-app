@@ -21,4 +21,6 @@ def set_value(feature, value):
 def get_current_time():
     print('time')
     return {'time': time.time()}
- #app.run(debug=False,host= '127.0.0.1', port=5000)
+
+if __name__ == '__main__':
+    app.run(debug=False,host= '127.0.0.1', port=5000)
