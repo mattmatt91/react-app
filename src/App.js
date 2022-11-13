@@ -5,12 +5,18 @@ import './App.css';
 
 // fetching data - dict with entire dataset
 function Features() {
-  let features
+
   fetch('/features/').then(res => res.json()).then(data => {
-    features = data;
-    console.log('from Feautres: ', features)
+    let items = []
+    let features = data;
+    //console.log('from Feautres: ', features)
+    for (let feature in features) {
+      items.push(Init_input(feature, features[feature]))  // content ist eine liste mit react objecten. warum werdne die nicht angezeigt?
+
+    }
+    return items;
   });
-  return features;
+
 }
 
 // building react object
@@ -22,7 +28,7 @@ function Init_input(key, val) {
         value='test'
       >{key}</label>
       <input type='range' // wie übergeben ich hier sowas wie ein self atritbut, dass die funktionen zu den slidern und labels gemapped sind
-        onChange={function () { Set_value(key, "control", "label"); }}
+        onChange={console.log(183)}
       />
       <label
         name='age'
@@ -44,18 +50,12 @@ function Set_value(key, control, label) { // wie übergebe ich da am besten die 
   label.value = value;
 }
 
-
 function App() {
-  let features = Features()
-  console.log('from App:  ' + features)
-
-  let items = []
-  for (let feature in features) {
-    items.push(Init_input(feature, feature.val))  // content ist eine liste mit react objecten. warum werdne die nicht angezeigt?
-  }
+  let feautes = Features()
+  console.log(feautes) // warum ist das hier undefined ?
   return (
     <div >
-      { items }
+      { Init_input("feature", 123)}
     </div>
   );
 }
