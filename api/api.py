@@ -12,7 +12,7 @@ def get_features():
         'freqarea': 12,
         'smooth': 13,
         'falldown': 14,
-        'fadespeed': 15,
+        'fadespeed': 'test',
         'rainbow': 16,
         'yrainbow': 17,
         'sym': 18,
@@ -21,7 +21,7 @@ def get_features():
         'center': False,
         'animation': 12,
         'render_spec': 12,
-        'render_animation': 11,
+        'render_animation': True,
         'quit': 11
     }
     print('get freatures', data)

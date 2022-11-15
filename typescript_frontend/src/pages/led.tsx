@@ -2,7 +2,15 @@ import Button from "@/components/buttons/Button"
 import axios from "axios"
 import { ChangeEvent, useEffect, useState } from "react"
 
+function map_bool(bool_val: any) {
+    if (bool_val) {
+        return 'ON'
+    }
+    return 'OFF'
+}
+
 type Feature = boolean | number | string
+
 
 interface Features {
     [key: string]: Feature
@@ -17,6 +25,43 @@ interface SliderProps {
     featureName: string
     feature: Feature
 }
+
+const BtnToggle: React.FC<BtnToggleProps> = ({ feature, featureName }) => {
+    const [value, setValue] = useState(feature)
+
+    const changeHandler = (event: any) => {
+        const { value } = event.target
+        const parsed = parseFloat(value)
+        setValue(parsed)
+    }
+
+    const submitHandler = () => {
+        let new_val = !feature
+        axios.post("/api/update_feature", { featureName, new_val })
+    }
+    // wie bekomme ich den nach rechts in die 4 ohne ein 3tes element?
+    return <div className="flex flex-row gap- w-full" >
+        <Button
+            onClick={submitHandler}
+            
+        >
+            toggle
+        </Button>
+    </div>
+}
+
+
+
+
+
+
+
+interface BtnToggleProps {
+    featureName: string
+    feature: Feature
+}
+
+
 
 const Slider: React.FC<SliderProps> = ({ feature, featureName }) => {
     const [value, setValue] = useState(feature)
@@ -47,16 +92,36 @@ const Slider: React.FC<SliderProps> = ({ feature, featureName }) => {
             id="customRange1"
             onChange={changeHandler}
         />
-        {
+        
             <Button
-                disabled={feature === value}
-                onClick={submitHandler}
+            disabled={feature === value}
+            onClick={submitHandler}
             >
                 update
             </Button>
-        }
+            
     </div>
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const FeatureComp: React.FC<FeatureCompProps> = ({ featureName, feature }) => {
 
@@ -74,6 +139,19 @@ const FeatureComp: React.FC<FeatureCompProps> = ({ featureName, feature }) => {
         </div>
     }
 
+    else if (featureType == "boolean") {
+        return <div className="grid grid-cols-3 gap-2 items-center">
+            <div className="font-bold text-xl">
+                {featureName}
+            </div>
+            <div>
+                {map_bool(feature) // warum kann man das nur mit any
+                }
+                {feature}
+            </div>
+            <BtnToggle feature={feature} featureName={featureName} />
+        </div>
+    }
     return <>{`${featureType} not implemented yet`}</>
 }
 
