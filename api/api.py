@@ -8,7 +8,7 @@ app = Flask(__name__)
 @app.route('/features')
 def get_features():
     data = {
-        'brigthness': {'val':1, 'options':[0,100]},
+        'brigthness': {'val':1, 'options':[0,100]},# für int und float sind das die min und max werte
         'freqarea': {'val':12, 'options':[10,50]},
         'smooth': {'val':12, 'options':[10,50]},
         'falldown': {'val':12, 'options':[10,50]},
