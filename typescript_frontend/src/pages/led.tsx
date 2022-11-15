@@ -41,27 +41,29 @@ const BtnToggle: React.FC<BtnToggleProps> = ({ feature, featureName }) => {
     }
     // wie bekomme ich den nach rechts in die 4 ohne ein 3tes element?
     return <div className="flex flex-row gap- w-full" >
-        <Button
-            onClick={submitHandler}
-            
-        >
-            toggle
-        </Button>
+        <input
+            type="checkbox"
+            className="
+      form-button
+      appearance-none
+      w-full
+      h-6
+      p-0
+      bg-gray-200
+      rounded-lg
+      focus:outline-none focus:ring-0 focus:shadow-none
+    "
+            id="customRange1"
+            onChange={changeHandler}
+        />
     </div>
 }
-
-
-
-
-
 
 
 interface BtnToggleProps {
     featureName: string
     feature: Feature
 }
-
-
 
 const Slider: React.FC<SliderProps> = ({ feature, featureName }) => {
     const [value, setValue] = useState(feature)
@@ -92,36 +94,16 @@ const Slider: React.FC<SliderProps> = ({ feature, featureName }) => {
             id="customRange1"
             onChange={changeHandler}
         />
-        
-            <Button
+
+        <Button
             disabled={feature === value}
             onClick={submitHandler}
-            >
-                update
-            </Button>
-            
+        >
+            update
+        </Button>
+
     </div>
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 const FeatureComp: React.FC<FeatureCompProps> = ({ featureName, feature }) => {
 
