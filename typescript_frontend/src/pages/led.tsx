@@ -27,24 +27,18 @@ interface SliderProps {
 }
 
 const BtnToggle: React.FC<BtnToggleProps> = ({ feature, featureName }) => {
-    const [value, setValue] = useState(feature)
-
+    const [cheked, setChecked] = useState(feature)
+    
     const changeHandler = (event: any) => {
-        const { value } = event.target
-        const parsed = parseFloat(value)
-        setValue(parsed)
+        setChecked(!cheked)  
+        console.log(typeof cheked, cheked)
+        axios.post("/api/update_feature", { featureName, cheked })
     }
 
-    const submitHandler = () => {
-        let new_val = !feature
-        axios.post("/api/update_feature", { featureName, new_val })
-    }
-    // wie bekomme ich den nach rechts in die 4 ohne ein 3tes element?
-    return <div className="flex flex-row gap- w-full" >
+    return <div className="flex flex-row gap-2 w-full" >
         <input
             type="checkbox"
             className="
-      form-button
       appearance-none
       w-full
       h-6
@@ -53,7 +47,7 @@ const BtnToggle: React.FC<BtnToggleProps> = ({ feature, featureName }) => {
       rounded-lg
       focus:outline-none focus:ring-0 focus:shadow-none
     "
-            id="customRange1"
+            id="customcheckbox1"
             onChange={changeHandler}
         />
     </div>
