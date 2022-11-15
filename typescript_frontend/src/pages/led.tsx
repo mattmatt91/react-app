@@ -25,7 +25,6 @@ const BtnToggle: React.FC<BtnToggleProps> = ({ feature, featureName }) => {
     const [cheked, setChecked] = useState(feature)
     const changeHandler = () => {
         setChecked(!cheked)  
-        console.log(typeof cheked, cheked)
         axios.post("/api/update_feature", { featureName, cheked })
     }
     

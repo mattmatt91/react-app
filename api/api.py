@@ -8,21 +8,21 @@ app = Flask(__name__)
 @app.route('/features')
 def get_features():
     data = {
-        'brigthness': 1,
-        'freqarea': 12,
-        'smooth': 13,
-        'falldown': 14,
-        'fadespeed': 'test',
-        'rainbow': 16,
-        'yrainbow': 17,
-        'sym': 18,
-        'maxdot': 19,
-        'blackspec': 10,
-        'center': False,
-        'animation': 12,
-        'render_spec': 12,
-        'render_animation': True,
-        'quit': 11
+        'brigthness': {'val':1, 'options':[0,100]},
+        'freqarea': {'val':12, 'options':[10,50]},
+        'smooth': {'val':12, 'options':[10,50]},
+        'falldown': {'val':12, 'options':[10,50]},
+        'fadespeed': {'val':12, 'options':[10,50]},
+        'rainbow': {'val':12, 'options':[10,50]},
+        'yrainbow': {'val':12, 'options':[10,50]},
+        'sym': {'val':12, 'options':[10,50]},
+        'maxdot': {'val':12, 'options':[10,50]},
+        'blackspec':  {'val':True, 'options':[True, False]},
+        'center': {'val':12, 'options':[10,50]},
+        'animation':  {'val':'prog1', 'options':['prog1', 'prog2', 'prog3']},
+        'render_spec':  {'val':True, 'options':[True, False]},
+        'render_animation': {'val':True, 'options':[True, False]}
+
     }
     print('get freatures', data)
 
