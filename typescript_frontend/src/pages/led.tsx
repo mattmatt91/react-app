@@ -4,8 +4,13 @@ import { ChangeEvent, useEffect, useState } from "react"
 
 
 
-type Feature = boolean | number | string
+type FeatureValue = boolean | number | string
+type Options = boolean[] | number[] | string[]
 
+interface Feature{
+    value: FeatureValue
+    options: Options 
+}
 
 interface Features {
     [key: string]: Feature
