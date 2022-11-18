@@ -29,11 +29,13 @@ def get_features():
     return data
 
 
-@app.route('/update_feature', methods=['POST'])
+@app.route('/update_feature', methods=['GET', 'POST'])
 def set_value():
-    print(request.json)
-    #val = random.randint(0, 10)
-    return {"data": ""}
+    data = request.json
+    feature = data['featureName']
+    val = data['value']
+    print({feature: val})
+    return {feature: val}
 
 
 if __name__ == '__main__':

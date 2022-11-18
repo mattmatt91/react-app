@@ -11,7 +11,10 @@ export const BtnToggle: React.FC<BtnToggleProps> = ({ feature, featureName }) =>
     const [value, setValue] = useState(feature.val)
     const changeHandler = () => {
         setValue(!value)
-        axios.post("/api/update_feature", { featureName, value })
+        axios.post("/api/update_feature", { featureName, value }).then((response) => {
+            console.log(response.data);
+            
+          });
     }
 
     return <div className="flex flex-row gap-2 w-full" >

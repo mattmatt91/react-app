@@ -15,8 +15,12 @@ export const Dropdown: React.FC<DropdownProps> = ({ feature, featureName }) => {
     const [value, setValue] = useState(feature.val)
     const changeHandler = (event: any) => {
         const { value } = event.target
-        setValue(value)
-        axios.post("/api/update_feature", { featureName, value })
+        axios.post("/api/update_feature", { featureName, value }).then((response) => {
+            console.log(response.data);
+            setValue(response.data[feature.key])
+          }, (error) => {
+            console.log(error);
+          });
     }
     return <div className="flex flex-row gap-2 w-full" >
         <select name="select"
@@ -30,7 +34,7 @@ export const Dropdown: React.FC<DropdownProps> = ({ feature, featureName }) => {
          focus:outline-none focus:ring-0 focus:shadow-none
          ">
             {feature.options.map(option =>
-                <option key={option}>{option}</option>
+                <option key={option as string}>{option}</option>
             )}
         </select>
 

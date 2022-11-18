@@ -1,9 +1,7 @@
-import axios from "axios"
-import { ChangeEvent, useEffect, useState } from "react"
-import Button from "@/components/buttons/Button"
 import { Dropdown } from "@/components/myComponents/dropdown"
-import { BtnToggle }   from "@/components/myComponents/togglebtn"
-import { Slider } from "@/components/myComponents/Slider"
+import { BtnToggle } from "@/components/myComponents/togglebtn"
+import { Slider } from "@/components/myComponents/slider"
+import { ReactElement } from "react"
 
 
 type Key = string
@@ -25,53 +23,36 @@ interface FeatureCompProps {
     feature: Feature
 }
 
-export const FeatureComp: React.FC<FeatureCompProps> = ({ featureName, feature }) => {
 
+const ControllComp: React.FC<FeatureCompProps> = ({ featureName, feature }) => {
     const featureType = typeof feature.val
-
     if (featureType == "number") {
-        return <div className="grid grid-cols-3 gap-2 items-center">
-            <div className="font-bold text-xl">
-                {featureName}
-            </div>
-            <div>
-            {feature.val}
-            </div>
-            <div>
-                <Slider feature={feature} featureName={featureName} />
-            </div>
-
-        </div>
+        return  <Slider feature={feature} featureName={featureName} />
     }
-
     else if (featureType == "boolean") {
-        return <div className="grid grid-cols-3 gap-3 items-center">
-            <div className="font-bold text-xl">
-                {featureName}
-            </div>
-            <div>
-            {feature.val}
-            </div>
-            <div>
-            {feature.val}
-            </div>
-            <div>
-                <BtnToggle feature={feature} featureName={featureName} />
-            </div>
-        </div>
+        return <BtnToggle feature={feature} featureName={featureName} />
     }
     else if (featureType == "string") {
-        return <div className="grid grid-cols-3 gap-3 items-center">
-            <div className="font-bold text-xl">
-                {featureName}
-            </div>
-            <div>
-            {feature.val}
-            </div>
-            <div>
-                <Dropdown feature={feature} featureName={featureName} />
-            </div>
-        </div>
+        return <Dropdown feature={feature} featureName={featureName} />
     }
-    return <>{`${featureType} not implemented yet`}</>
+    return  <>{`${featureType} not implemented yet`}</>
+  }
+
+  
+export const FeatureComp: React.FC<FeatureCompProps> = ({ featureName, feature }) => {
+
+    return <div className="grid grid-cols-3 gap-2 items-center">
+        <div className="font-bold text-xl">
+            {featureName}
+        </div>
+        <div>
+            {feature.val}
+        </div>
+        <div>
+            <ControllComp featureName={featureName} feature={feature} />
+        </div>
+
+    </div>
 }
+
+

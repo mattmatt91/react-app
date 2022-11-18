@@ -14,12 +14,16 @@ export const Slider: React.FC<SliderProps> = ({ feature, featureName }) => {
 
     const changeHandler = (event: any) => {
         const { value } = event.target
+        feature.val = value
         setValue(value)
+        axios.post("/api/update_feature", { featureName, value }).then((response) => {
+            console.log(response.data);
+        }, (error) => {
+            console.log(error);
+        });
+     
     }
 
-    const submitHandler = () => {
-        axios.post("/api/update_feature", { featureName, value })
-    }
 
     return <div className="flex flex-row gap-3 w-full">
         <input
@@ -40,11 +44,6 @@ export const Slider: React.FC<SliderProps> = ({ feature, featureName }) => {
             max={100}
             onChange={changeHandler}
         />
-        <Button
-            disabled={feature.val === value}
-            onClick={submitHandler}
-        >
-            update
-        </Button>
+
     </div>
 }
