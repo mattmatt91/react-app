@@ -25,6 +25,7 @@ export const Dropdown: React.FC<DropdownProps> = ({ feature, featureName }) => {
     return <div className="flex flex-row gap-2 w-full" >
         <select name="select"
             onChange={changeHandler}
+            defaultValue={feature.val as string}
             className="
          w-full
          h-6

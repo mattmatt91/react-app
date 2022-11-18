@@ -39,10 +39,10 @@ export const Slider: React.FC<SliderProps> = ({ feature, featureName }) => {
             focus:outline-none focus:ring-0 focus:shadow-none
             "
             id="customRange1"
-
-            min="0"
-            max={100}
+            min={feature.options[0]as string}
+            max={feature.options[1]as string}
             onChange={changeHandler}
+            defaultValue={feature.val as string}
         />
 
     </div>

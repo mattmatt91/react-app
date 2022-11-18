@@ -20,6 +20,7 @@ export const BtnToggle: React.FC<BtnToggleProps> = ({ feature, featureName }) =>
     return <div className="flex flex-row gap-2 w-full" >
         <input
             type="checkbox"
+            defaultChecked={feature.val as boolean}
             className="
                 appearance-none
                 w-full
