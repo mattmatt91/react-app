@@ -1,6 +1,6 @@
 import axios from "axios"
-import { ChangeEvent, useEffect, useState } from "react"
-import { Features, FeatureComp, Feature } from "@/components/myComponents/Features"
+import { useState } from "react"
+import { Feature } from "@/components/myComponents/Features"
 
 
 

@@ -41,12 +41,9 @@ const ControllComp: React.FC<FeatureCompProps> = ({ featureName, feature }) => {
   
 export const FeatureComp: React.FC<FeatureCompProps> = ({ featureName, feature }) => {
 
-    return <div className="grid grid-cols-3 gap-2 items-center">
+    return <div className="grid grid-cols-2 gap-2 items-center">
         <div className="font-bold text-xl">
             {featureName}
-        </div>
-        <div>
-            {feature.val}
         </div>
         <div>
             <ControllComp featureName={featureName} feature={feature} />

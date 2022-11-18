@@ -1,7 +1,6 @@
 import axios from "axios"
-import { ChangeEvent, useEffect, useState } from "react"
-import { Features, FeatureComp, Feature } from "@/components/myComponents/Features"
-import Button from "@/components/buttons/Button"
+import { useState } from "react"
+import { Feature } from "@/components/myComponents/Features"
 
 
 interface SliderProps {
@@ -20,12 +19,11 @@ export const Slider: React.FC<SliderProps> = ({ feature, featureName }) => {
             console.log(response.data);
         }, (error) => {
             console.log(error);
-        });
-     
+        });    
     }
 
-
     return <div className="flex flex-row gap-3 w-full">
+        <label> { feature.val as string}</label>
         <input
             type="range"
             className="
@@ -42,8 +40,8 @@ export const Slider: React.FC<SliderProps> = ({ feature, featureName }) => {
             min={feature.options[0]as string}
             max={feature.options[1]as string}
             onChange={changeHandler}
-            defaultValue={feature.val as string}
+            defaultValue={feature.val as string}      
         />
-
     </div>
 }
+
