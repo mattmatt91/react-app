@@ -1,28 +1,40 @@
 import React, { Component } from 'react';
+import axios from "axios"
 
 
-type MyProps = {
-	// using `interface` is also ok
-	message: string;
-  };
-  type MyState = {
-	count: number; // like this
-  };
-  
- 
- export default class App extends React.Component<{ message: string }, { count: number }> {
-	state = { count: 0 };
-	render() {
-	  return (
-		<div onClick={() => this.increment(1)}>
-		  {this.props.message} {this.state.count}
-		</div>
-	  );
+
+
+export default class App extends React.Component<{ time: number }> {
+	state = { time: 0 };
+	interval: any = 1000
+
+
+
+	// increment = (amt: number) => {
+	// 	this.setState((state) => ({
+	// 		count: state.count + 2*amt,
+	//   }));
+	// };
+	new_data = (data: number[])=> {
+		this.setState((state) => ({
+			
+		}));
 	}
-	increment = (amt: number) => {
-	  // like this
-	  this.setState((state) => ({
-		count: state.count + amt,
-	  }));
-	};
-  }
+	componentDidMount() {
+		this.interval = setInterval(
+			() => this.setState((state) => ({ time: Date.now() })),
+			1);
+	}
+
+	componentWillUnmount() {
+		clearInterval(this.interval);
+	}
+
+	render() {
+		return (
+			<div onClick={() => console.log('stet')}>
+				{this.state.time}
+			</div>
+		);
+	}
+}
