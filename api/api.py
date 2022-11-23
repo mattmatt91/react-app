@@ -1,6 +1,8 @@
 from time import time
 from flask import Flask, jsonify, request
-import random
+from numpy.random import randint
+
+
 
 app = Flask(__name__)
 
@@ -44,6 +46,12 @@ def get_time():
     data = {"time": time()}
     print(data)
     return data
+
+@app.route('/get_data', methods=['GET', 'POST'])
+def get_data():
+    data  = randint(0, 10, 20)
+    print(data)
+    return {'new_data': data.tolist()}
 
 
 if __name__ == '__main__':

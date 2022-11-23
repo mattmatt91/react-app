@@ -3,27 +3,28 @@ import axios from "axios"
 
 
 
+function FetchData() {
+	axios.post("/api/get_data").then((response) => {
+		const data: number[] = response.data.new_data
+		//console.log(data[0]);
+		return data
+	});
+}
 
-export default class App extends React.Component<{ time: number }> {
-	state = { time: 0 };
+
+	export default class App extends React.Component<{ new_data: number[] }> {
+	state = { new_data: [0,4,8,9] };
 	interval: any = 1000
 
 
 
-	// increment = (amt: number) => {
-	// 	this.setState((state) => ({
-	// 		count: state.count + 2*amt,
-	//   }));
-	// };
-	new_data = (data: number[])=> {
-		this.setState((state) => ({
-			
-		}));
-	}
 	componentDidMount() {
+		console.log(this.state)
 		this.interval = setInterval(
-			() => this.setState((state) => ({ time: Date.now() })),
-			1);
+			() => this.setState((state) => ({
+				new_data: FetchData()
+		})),
+			1000);
 	}
 
 	componentWillUnmount() {
@@ -33,7 +34,7 @@ export default class App extends React.Component<{ time: number }> {
 	render() {
 		return (
 			<div onClick={() => console.log('stet')}>
-				{this.state.time}
+				{this.state.new_data}
 			</div>
 		);
 	}
