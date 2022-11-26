@@ -53,6 +53,13 @@ def get_data():
     print(data)
     return {'new_data': data.tolist()}
 
+@app.route('/menues_page', methods=['GET', 'POST'])
+def get_setupmenu():
+    # data = request.json
+    path  = 'pics\\img2.jpg'
+    data = {'page1':{'path_img': path, 'conrtols': ['next', 'back']}}
+    print(data)
+    return data
 
 if __name__ == '__main__':
     app.run(debug=False, host='127.0.0.1', port=5000)
